@@ -128,7 +128,7 @@ def data_parse(data, year, days, backdate):
             swvel4[count] = np.nanmean(swvel[Dstart:Dend])
         else:
             swvel4[count] = np.nan  # Default value for all-NaN slices
-        date[count] = year*1000 + 1 + (count)/(60*24)
+        date[count] = round(year*1000 + 1 + (count)/(60*24),8)
         count += 1
 
 
@@ -255,9 +255,9 @@ def main():
     years= download_files()
     year_limit = 1982
     years = [year for year in years if year >= year_limit]
-    print(f"Updating {years}")
-    #years = list(range(1982, 2000 + 1))
+    years = list(range(1982, 2024))
     #years = [2024]
+    print(f"Updating {years}")
     for year in years:
         print(f"Year: {year}")
         data, days, backdate=get_data(year)
